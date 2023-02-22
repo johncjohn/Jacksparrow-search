@@ -28,28 +28,16 @@ Base.metadata.create_all(bind=engine)
 #print(users)
 
 
-#@app.route("/", methods=("GET", "POST"))
-#def index():
- #   if request.method == "POST":
-  #      intext = request.form["query"]
-   #     response = GPT_Completion(intext)
-    #    return render_template('creation.html', result=response)
-
-    #result = request.args.get("result")
-    #return render_template("index.html", result=result)
-  
-@app.route('/')
+@app.route("/", methods=("GET", "POST"))
 def index():
-    return render_template('staff_sign_up.html')
+    if request.method == "POST":
+        intext = request.form["query"]
+        response = GPT_Completion(intext)
+        return render_template('creation.html', result=response)
 
-@app.route('/submit', methods=['POST'])
-def submit():
-    name = request.form.get('name')
-    email = request.form.get('email')
-    password = request.form.get('password')
-    return f'Thank you for signing up, {name}! We will send a confirmation email to {email}.'
-
-
+    result = request.args.get("result")
+    return render_template("index.html", result=result)
+  
 
 def GPT_Completion(intext):
   ## Call the API key under your account (in a secure way)
